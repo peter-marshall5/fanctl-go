@@ -33,6 +33,13 @@ The defaults for this program are selected for my specific laptop model (HP 15-d
 If it's a different model or vendor, you will need to find the right speed control register address as well as the minimum and maximum speed values and the manual control register address. You can install NBFC and find a working config for your laptop model and look at its contents to find these values. It's also possible that the acpi-ec driver can't access the EC or that none of the registers control the fan speed so this script won't work for you.
 # Installation
 First, you will need to install and load [the acpi-ec driver by MusiKid](https://github.com/MusiKid/acpi_ec) and make sure that /dev/ec exists.
+I created a prebuilt binary for x86 systems for ease of use. If you want, you can compile the program yourself (Optional):
+```
+rm fanctl
+gccgo fanctl.go -o fanctl -O2
+strip fanctl
+upx --ultra-brute fanctl
+```
 Then, copy the files to their required destinations.
 ```
 sudo cp fanctl fanctl.sh /usr/bin/
