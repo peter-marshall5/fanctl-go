@@ -5,7 +5,8 @@ This program runs as a systemd service in the background to monitor temperatures
 # Why not use NBFC?
 NBFC uses Mono Runtime on Linux which is hard to compile and is bloated, taking up excessive amounts of storage. It causes lots of CPU wakeups in the background which can reduce battery life as well as having really basic fan curves and no support for smoothing the transitions between speeds. This program aims to reduce fan noise and smooth the transitions between fan speeds as well as having minimal background CPU usage.
 # How to use
-```Usage of fanctl:
+```
+Usage of fanctl:
   -debug
         Debug output
   -ec-addr int
