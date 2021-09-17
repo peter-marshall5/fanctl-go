@@ -28,5 +28,24 @@ NBFC uses Mono Runtime on Linux which is hard to compile and is bloated, taking 
         Path to CPU temperature reading (default "/sys/class/hwmon/hwmon5/temp2_input")
 ```
 You can change the options in fanctl.sh.
-The defaults for this program are selected for my specific laptop model (HP 15-db1003ca). If you have a laptop with a similar model or with the same model of EC, the defaults may work.
+The defaults for this program are selected for my specific laptop model (HP 15-db1003ca). You may have to change the name and/or number of the CPU thermal zone sensor. If you have a laptop with a similar model or with the same model of EC, the defaults may work.
 If it's a different model or vendor, you will need to find the right speed control register address as well as the minimum and maximum speed values and the manual control register address. You can install NBFC and find a working config for your laptop model and look at its contents to find these values. It's also possible that the acpi-ec driver can't access the EC or that none of the registers control the fan speed so this script won't work for you.
+# Installation
+First, you will need to install and load [the acpi-ec driver by MusiKid](https://github.com/MusiKid/acpi_ec) and make sure that /dev/ec exists.
+Then, copy the files to their required destinations.
+```
+sudo cp fanctl fanctl.sh /usr/bin/
+sudo cp fanctl.service /etc/systemd/system
+```
+Edit the configuration:
+```
+nano /usr/bin/fanctl.sh
+```
+Test the service:
+```
+sudo /usr/bin/fanctl.sh
+```
+If it controls the fan properly, enable and start the systemd unit.
+```
+sudo systemctl enable --now fanctl
+```
