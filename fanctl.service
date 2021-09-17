@@ -1,0 +1,10 @@
+[Unit]
+Description=Fan Control service
+
+[Service]
+ExecStart=/usr/bin/fanctl.sh
+Type=simple
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
